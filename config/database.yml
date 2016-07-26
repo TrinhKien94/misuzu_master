@@ -18,11 +18,11 @@ development:
   # username: WSKINTAI
   # password: WSKINTAI
 
-  database: <%= ENV["database"] %>
+  database: jpt
   host: <%= ENV["host"] %>
 #  host: 192.168.35.178
-  username: <%= ENV["username"] %>
-  password: <%= ENV["password"] %>
+  username: duytung
+  password: jpt
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -9,7 +9,11 @@ Jpt::Application.routes.draw do
   resources :dengonyoukens
   resources :dengonkaitous
   resources :dengons
-  root to: 'users#login'
+
+  root to: 'main#index'
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  delete "logout" => "sessions#destroy"
 
   resources :bashokubunmsts
 
@@ -28,7 +32,7 @@ Jpt::Application.routes.draw do
   resources :kintais do
     collection {get :search}
   end
-  
+
   resources :events, only: [:index, :new, :create, :edit, :update] do
 		collection {post :ajax, :custom, :create_basho, :create_kaisha, :time_line_view}
     collection {get :time_line_view}
@@ -45,40 +49,40 @@ Jpt::Application.routes.draw do
 	match 'main', to: 'main#index', via: [:get]
 
   resources :users do
-    collection {get :login, :change_pass}
+    collection {get :change_pass}
     collection {post :change_pass}
   end
-  
-  resources :yakushokumasters, param: :id do 
+
+  resources :yakushokumasters, param: :id do
   end
-  
+
   resources :jpt_holiday_msts do
   end
 
   resources :shainmasters do
   end
-  
+
   resources :keihiheads do
     collection {post :ajax, :shonin_search}
     collection {get :shonin_search}
   end
-  
+
   resources :shozokumasters do
     collection {post :import}
   end
-  
+
   resources :joutaimasters do
     collection {post :import}
   end
-  
+
   resources :kaishamasters, param: :id do
     collection { post :import}
   end
-  
+
   resources :shozais do
     collection { post :import}
   end
-  
+
   constraints(:id => /\w+(,\w+)*/) do
     resources :kouteimasters do
       collection {post :ajax}

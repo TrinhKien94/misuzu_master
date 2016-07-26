@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   respond_to :js
-  
+
   include UsersHelper
-  
+
   # GET /users
   # GET /users.json
   def index
     @users = User.all
   end
 
-  def login
-    reset_session
-  end
-
   # GET /users/1
   # GET /users/1.json
   def show
-    
+
   end
 
   # GET /users/new
@@ -58,7 +54,7 @@ class UsersController < ApplicationController
         end
 
         @user = User.where('担当者コード = ? AND パスワード = ?',params[:user][:担当者コード].downcase, params[:user][:パスワード]).first
-        
+
         if @user.nil?
           flash.now[:alert] = t "app.flash.login_field"
           render "login"

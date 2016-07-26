@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.3.1'
 gem 'rails'
 # gem 'sqlite3'
 
@@ -10,9 +10,9 @@ gem 'passenger', '>= 5.0.4'
 # gem 'thin'
 # gem 'puma'
 
-# for avatar, upload picture 
+# for avatar, upload picture
 gem 'paperclip'
-
+gem "bcrypt", "~> 3.1.7"
 # gem 'active_decorator'
 # gem 'cells'
 
@@ -73,4 +73,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rspec-rails'
+  gem "byebug"
+  gem "web-console", "~> 2.0"
+  gem "spring"
 end

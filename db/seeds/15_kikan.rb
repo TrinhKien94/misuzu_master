@@ -1,6 +1,6 @@
-Kikan.delete_all
-Kikan.reset_pk_sequence
-Kikan.create!([
+Kikanmst.delete_all
+Kikanmst.reset_pk_sequence
+Kikanmst.create!([
                    {機関コード:'0100', 機関名: 'JR', 備考: '日本JR'},
                    {機関コード:'2000', 機関名: 'バス', 備考: '日本バス'},
                    {機関コード:'9001', 機関名: 'タクシー', 備考: '日本タクシー'},

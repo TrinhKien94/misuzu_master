@@ -295,6 +295,8 @@ ActiveRecord::Schema.define(version: 20160710014811) do
     t.datetime "avatar_updated_at"
     t.string   "email"
     t.string   "再パスワード"
+    t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
   add_index "担当者マスタ", ["担当者コード"], name: "index_担当者マスタ_on_担当者コード", unique: true, using: :btree
