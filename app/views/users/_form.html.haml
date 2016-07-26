@@ -2,10 +2,14 @@
   .col-md-2.col-md-offset-1
     = f.input :担当者コード
     = f.input :担当者名称
-    = f.input :パスワード, as: :password
-    = f.input :再パスワード, as: :password
-    = f.input :avatar, as: :file
-    = f.input :email, as: :email
-    - if session[:user] == ENV['admin_user']
+    = f.label :password, "パスワード"
+    = f.password_field :password
+    = f.label :password_confirmation, "再パスワード"
+    = f.password_field :password_confirmation
+    = f.label :avatar, "イメージ"
+    = f.file_field :avatar
+    = f.label :email, "メイル"
+    = f.email_field :email
+    - if current_user && current_user.admin?
       = f.input :admin, as: :boolean
     = f.button :submit, class: 'btn btn-primary'

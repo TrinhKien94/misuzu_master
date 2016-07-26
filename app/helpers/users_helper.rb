@@ -13,15 +13,6 @@ module UsersHelper
     end
   end
 
-  def check_kintai_at_day(at_day)
-    at_day = Date.today if at_day.nil?
-    kintai = Kintai.find_by 日付: at_day, 社員番号: session[:user]
-    return if kintai
-    start_date = at_day.beginning_of_month
-    end_date = at_day.end_of_month
-    MonthRange.new(start_date..end_date).each {|day| create_kintai(day)}
-  end
-
   # def check_kintai
   #   kintai = Kintai.find_by 日付: Date.today, 社員番号: session[:user]
   #   return if kintai
