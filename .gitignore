@@ -20,7 +20,6 @@ db/*.sqlite3
 /db/*.sqlite3-journal
 /log/*
 /tmp/*
-.byebug_history
 
 # configuration file introduced in Rails 4.1
 /config/secrets.yml
@@ -82,3 +81,4 @@ pickle-email-*.html
 # Environment files that may contain sensitive data
 # Ignore application configuration
 /config/application.yml
+.byebug_history

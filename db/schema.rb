@@ -285,7 +285,6 @@ ActiveRecord::Schema.define(version: 20160710014811) do
   create_table "担当者マスタ", id: false, force: :cascade do |t|
     t.string   "担当者コード",              null: false
     t.string   "担当者名称"
-    t.string   "パスワード"
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -294,7 +293,6 @@ ActiveRecord::Schema.define(version: 20160710014811) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "email"
-    t.string   "再パスワード"
     t.string   "password_digest"
     t.string   "remember_digest"
   end

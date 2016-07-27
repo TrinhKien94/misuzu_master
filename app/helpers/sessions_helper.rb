@@ -1,6 +1,12 @@
 module SessionsHelper
   def log_in user
+    session[:user] = user.id
     session[:current_user_id] = user.id
+    session[:selected_shain] = user.shainmaster.id
+    # 現在保留
+    # check_shozai()
+    check_kintai_at_day(Date.today)
+    respond_with user, location: time_line_view_events_url
   end
 
   def current_user
@@ -48,5 +54,14 @@ module SessionsHelper
 
   def store_location
     session[:forwarding_url] = request.url if request.get?
+  end
+
+  def check_kintai_at_day(at_day)
+    at_day = Date.today if at_day.nil?
+    kintai = Kintai.find_by 日付: at_day, 社員番号: session[:user]
+    return if kintai
+    start_date = at_day.beginning_of_month
+    end_date = at_day.end_of_month
+    MonthRange.new(start_date..end_date).each {|day| create_kintai(day)}
   end
 end
