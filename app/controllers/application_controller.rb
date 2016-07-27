@@ -15,8 +15,7 @@ class ApplicationController < ActionController::Base
   # @todo enable_authorization
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = t "app.flash.access_denied"
-    redirect_to :back
-    # redirect_to root_url, :alert => exception.message
+    redirect_to root_path
   end
 
   # todo enable for production mode

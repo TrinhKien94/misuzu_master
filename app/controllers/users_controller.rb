@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-<<<<<<< b66a9a4b48b6a19b97444089af3a2bcc9ac30a81
   skip_authorize_resource only: [:new, :create]
-=======
->>>>>>> fix password for user
-  respond_to :js
 
   # GET /users
   # GET /users.json
