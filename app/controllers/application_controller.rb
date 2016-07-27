@@ -24,6 +24,13 @@ class ApplicationController < ActionController::Base
   #   redirect_to :back, :alert => exception.message
   # end
 
+  def require_user!
+    unless logged_in?
+      store_location
+      flash[:danger] = t "message.please_log_in"
+      redirect_to login_path
+    end
+  end
   # @todo record not found
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   # rescue_from User::NotAuthorized, with: :user_not_authorized
@@ -55,14 +62,6 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:error] = "You don't have access to this section."
     redirect_to :back
-  end
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = t "message.please_log_in"
-      redirect_to login_url
-    end
   end
 end
 

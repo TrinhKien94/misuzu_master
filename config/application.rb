@@ -59,7 +59,7 @@ module Jpt
     # config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     # config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
     # config.assets.precompile += ["*.js", "*.css", "jquery-migrate-rails.js"]
-    
+
     # Add the fonts path
     # config.assets.paths << Rails.root.join('app','assets','fonts')
     config.assets.paths += %W("#{Rails.root}/vendor/assets/fonts")
