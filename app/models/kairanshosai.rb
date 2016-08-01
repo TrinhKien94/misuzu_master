@@ -9,5 +9,6 @@ class Kairanshosai < ActiveRecord::Base
   delegate :件名, to: :kairan, allow_nil: true
   delegate :内容, to: :kairan, allow_nil: true
   # delegate :確認, to: :kairan, allow_nil: true
+  enum 状態: [:未確認, :確認済, :回答済]
 
 end

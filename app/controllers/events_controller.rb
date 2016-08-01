@@ -15,7 +15,7 @@ class EventsController < ApplicationController
       where("Date(開始) >= ?",(Date.today - 1.month).to_s(:db)).
       order(開始: :desc)
     @shain = Shainmaster.find(session[:selected_shain])
-    @kairanCount = Kairanshosai.where(対象者: session[:user], 確認: false).count
+    @kairanCount = Kairanshosai.where(対象者: session[:user], 状態: 0).count
     shain = Shainmaster.find(session[:user])
     if shain
       shain.回覧件数 = @kairanCount
@@ -84,7 +84,6 @@ class EventsController < ApplicationController
   def create
     @event = User.find(session[:user]).shainmaster.events.new event_params
     # set_fkey @event, event_params
-
     flash[:notice] = t 'app.flash.new_success' if @event.save
 
     # if @event.save
@@ -143,10 +142,10 @@ class EventsController < ApplicationController
   def ajax
    case params[:id]
      when 'event_状態コード'
-       joutai = Joutaimaster.find_by(状態コード: params[:event_joutai_code])
+       joutai_name = Joutaimaster.find_by(状態コード: params[:event_joutai_code]).try(:状態名)
        # event= [{id: '1', resourceId: 'b', start: '2015-08-07 10:00:00', end: '2015-08-07 14:00:00', title: joutai.name }]
        # data = {joutai_name: joutai.name, event: event, event_color: joutai.color, event_text_color: joutai.text_color}
-       data = {joutai_name: joutai.name}
+       data = {joutai_name: joutai_name}
        respond_to do |format|
          format.json { render json: data}
        end

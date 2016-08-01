@@ -32,10 +32,7 @@
           %td= kairanshosai.kairan.kairanyokenmst.try :名称 if kairanshosai.kairan
           %td= kairanshosai.件名
           %td.breakAll= kairanshosai.内容
-          - kakunin =  kairanshosai.確認 == true ? '確認済':'未確認'
-          - if kairanshosai.回答済 == true
-            - kakunin = '回答済'
-          %td= kakunin
+          %td= kairanshosai.状態
           - kairanKaitou = Kairan.find kairanshosai.回覧コード
           - kaito = kairanshosai.kairan.確認要 == true ? '要':''
           %td= link_to kaito, kaitou_kairan_path(kairanKaitou)

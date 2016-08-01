@@ -461,8 +461,9 @@ $(function(){
         var d = oBashoTable.row(this).data();
         $('#event_場所コード').val(d[0]);
         //$('#basho_name').text(d[1]);
-        $('.hint-basho-refer').text(d[1])
-
+        $('.hint-basho-refer').text(d[1]);
+        $('#event_場所コード').closest('.form-group').find('span.help-block').remove()
+        $('#event_場所コード').closest('.form-group').removeClass('has-error')
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
             $(this).removeClass('success');
@@ -643,18 +644,26 @@ $(function () {
 
 // keydown trigger
 $(function(){
-    $("#event_状態コード").keydown( function(e) {
+    $('#event_状態コード').keydown( function(e) {
         if (e.keyCode == 9 && !e.shiftKey) {
             var event_joutai = $("#event_状態コード").val();
             if (!event_joutai) return
             jQuery.ajax({
                 url: '/events/ajax',
-                data: {id: "event_状態コード",event_joutai_code: event_joutai},
+                data: {id: 'event_状態コード',event_joutai_code: event_joutai},
                 type: "POST",
+                // processData: false,
+                // contentType: 'application/json',
                 success: function(data) {
-                    //$('#joutai_name').text(data.joutai_name);
-                    $('.hint-joutai-refer').text(data.joutai_name);
-                    console.log("getAjax joutai_name:"+ data.joutai_name);
+                    //$('#job_name').text(data.job_name);
+                    if (data.joutai_name != null){
+                      $('.hint-joutai-refer').text(data.joutai_name);
+                      console.log("getAjax joutai_name:"+ data.joutai_name);
+                    }
+                    else{
+                      $('.hint-joutai-refer').text('');
+                      console.log("getAjax joutai_name:"+ data.joutai_name);
+                    }
                 },
                 failure: function() {
                     console.log("event_状態コード keydown Unsuccessful");
@@ -666,18 +675,24 @@ $(function(){
 
     $('#event_場所コード').keydown( function(e) {
         if (e.keyCode == 9 && !e.shiftKey) {
-            var event_basho_code = $('#event_場所コード').val();
-            if (!event_basho_code) return
+            var event_basho = $('#event_場所コード').val();
+            if (!event_basho) return
             jQuery.ajax({
                 url: '/events/ajax',
-                data: {id: 'event_場所コード',event_basho_code: event_basho_code},
+                data: {id: 'event_場所コード',event_basho_code: event_basho},
                 type: "POST",
                 // processData: false,
                 // contentType: 'application/json',
                 success: function(data) {
+                    if (data.basho_name != null){
                     //$('#basho_name').text(data.basho_name);
-                    $('.hint-basho-refer').text(data.basho_name);
-                    console.log("getAjax basho_name:"+ data.basho_name);
+                        $('.hint-basho-refer').text(data.basho_name);
+                        console.log("getAjax basho_name:"+ data.basho_name);
+                    }
+                    else{
+                      $('.hint-basho-refer').text('');
+                      console.log("getAjax basho_name:"+ data.basho_name);
+                    }
                 },
                 failure: function() {
                     console.log("event_場所コード keydown Unsuccessful");
@@ -697,8 +712,14 @@ $(function(){
                 // contentType: 'application/json',
                 success: function(data) {
                     //$('#koutei_name').text(data.koutei_name);
-                    $('.hint-koutei-refer').text(data.koutei_name);
-                    console.log("getAjax koutei_name:"+ data.koutei_name);
+                    if(data.koutei_name != null){
+                        $('.hint-koutei-refer').text(data.koutei_name);
+                        console.log("getAjax koutei_name:"+ data.koutei_name);
+                    }
+                    else{
+                      $('.hint-koutei-refer').text('');
+                      console.log("getAjax koutei_name:"+ data.koutei_name);
+                    }
                 },
                 failure: function() {
                     console.log("event_工程コード keydown Unsuccessful");
@@ -720,9 +741,15 @@ $(function(){
                 // processData: false,
                 // contentType: 'application/json',
                 success: function(data) {
+                    if(data.job_name != null){
                     //$('#job_name').text(data.job_name);
-                    $('.hint-job-refer').text(data.job_name);
-                    console.log("getAjax job_name:"+ data.job_name);
+                        $('.hint-job-refer').text(data.job_name);
+                        console.log("getAjax job_name:"+ data.job_name);
+                    }
+                    else{
+                      $('.hint-job-refer').text('');
+                      console.log("getAjax job_name:"+ data.job_name);
+                    }
                 },
                 failure: function() {
                     console.log("event_job番号 keydown Unsuccessful");
