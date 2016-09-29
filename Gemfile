@@ -67,6 +67,8 @@ gem "kaminari-bootstrap", "~> 3.0.1"
 	# gem 'less-rails'
 	# gem 'twitter-bootstrap-rails'
 # end
+gem 'axlsx', '~> 2.0'
+gem "axlsx_rails"
 
 group :development, :test do
   gem 'better_errors'

@@ -49,3 +49,6 @@ $(document).on('ready', function() {
 $(document).ready(function() {
     $('#export_table').DataTable();
 } );
+$(document).ready(function() {
+  $('#kintai_table').dataTable();
+});

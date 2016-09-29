@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Shainmaster") do |sheet|
+    sheet.add_row ['社員番号', '社員氏名', '実労働時間', '遅刻早退' ,'普通残業', '深夜残業',
+      '普通保守', '深夜保守', '保守携帯回数', '休暇日数', '午前半休回数', '午後半休回数']
+    @shainmasters.each do |shainmaster|
+        sheet.add_row [shainmaster.id,
+          shainmaster.title,
+          shainmaster.kintais.get_by_mounth(@date).sum(:実労働時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:遅刻時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:普通残業時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:深夜残業時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:普通保守時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:深夜保守時間),
+          shainmaster.kintais.get_by_mounth(@date).sum(:保守携帯回数),
+          shainmaster.kintais.day_off.count,
+          shainmaster.kintais.morning_off.count,
+          shainmaster.kintais.afternoon_off.count]
+    end
+end

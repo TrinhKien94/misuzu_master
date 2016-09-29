@@ -153,7 +153,9 @@ Jpt::Application.routes.draw do
 
   namespace :kanris do
     root to: "main#index"
-    resources :kintais, only: [:index, :show]
+    resources :kintais, only: [:index, :show] do
+      collection {get :export_excel}
+    end
     resources :keihiheads, only: :index
   end
 end

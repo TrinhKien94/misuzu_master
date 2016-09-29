@@ -12,17 +12,18 @@
 <%= form_for :kintai, url: kanris_kintais_path, html: {class:'form-inline'}, method: :get do |f|%>
 
 <%= render "kanris/shared/header", f:f %>
-
-<table  id="kintai_table" class="table table-bordered table-hover" cellspacing="0">
+<%= link_to "データをエクスポート" , export_excel_kanris_kintais_path(format: 'xlsx', date: @date) %>
+<hr>
+<table  id="kintai_table" class="table table-bordered table-hover " cellspacing="0" data-sort-name="name" data-sort-order="desc">
   <thead>
   <tr>
-    <th rowspan="2">社員番号</th>
+    <th rowspan="2" data-field="id" data-sortable="true">社員番号</th>
     <th rowspan="2">社員氏名</th>
     <th colspan="6">就 業 時 間</th>
-    <th rowspan="2">保守携帯回数</th>
-    <th rowspan="2">休暇日数</th>
-    <th rowspan="2">午前半休回数</th>
-    <th rowspan="2">午後半休回数</th>
+    <th rowspan="2">保守携帯</th>
+    <th rowspan="2">休暇</th>
+    <th rowspan="2">午前半休</th>
+    <th rowspan="2">午後半休</th>
     <th rowspan="2"></th>
     <!--<th rowspan="2"></th>-->
     <!--<th rowspan="2"></th>-->
@@ -59,9 +60,9 @@
         <td><%= link_to "詳細", kanris_kintai_path(shainmaster.id, date: @date) %></td>
       </tr>
     <% end %>
-    <%= paginate @shainmasters %>
   <% end %>
   </tbody>
 </table>
 <% end %>
+
 
