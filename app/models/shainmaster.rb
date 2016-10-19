@@ -24,7 +24,7 @@ class Shainmaster < ActiveRecord::Base
     from 担当者マスタ)"}
   scope :get_kubun, ->{where(区分: false)}
   delegate :所在名, to: :shozai, prefix: :shozai, allow_nil: true
-
+  after_save :set_deley_job
   def self.import(file)
     # a block that runs through a loop in our CSV data
     CSV.foreach(file.path, headers: true) do |row|
@@ -51,5 +51,10 @@ class Shainmaster < ActiveRecord::Base
         csv << attributes.map{ |attr| shainmaster.send(attr) }
       end
     end
+  end
+
+  def set_deley_job
+    end_day = Time.now.end_of_day
+    self.delay(run_at: end_day).update_attributes 所在コード: nil
   end
 end

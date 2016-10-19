@@ -69,6 +69,8 @@ gem "kaminari-bootstrap", "~> 3.0.1"
 # end
 gem 'axlsx', '~> 2.0'
 gem "axlsx_rails"
+gem 'delayed_job_active_record'
+gem 'unicorn'
 
 group :development, :test do
   gem 'better_errors'
